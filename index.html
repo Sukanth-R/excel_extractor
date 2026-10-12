@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Extractor</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div class="header">
+        <h1>Excel Extractor</h1>
+    </div>
+    <div class="intro">
+        <h2>Welcome to the Excel Extractor!</h2>
+        <p>Use this tool to extract data from Excel files.</p>
+        <div class="extract_function">
+            <input type="file" class="fileInput" id="fileInput" accept=".xlsx, .xls"/>
+            <button id="extractButton" onclick="extractData()">Extract Data</button>
+        </div>
+    </div>
+
+    <div class="dataSection" style="display:none;">
+        <h2>Extracted Data</h2>
+        <div class="tableWrapper">
+            <table id="dataTable"></table>
+        </div>
+    </div>
+
+    <div class="analyzeSection">
+        <h2>Ask a Question on excel data</h2>
+        <textarea id="questionInput" placeholder="Ex:Summarize the data in the first sheet."></textarea>
+        <button id="analyzeButton" onclick="analyzeData()">Analyze Data with Claude</button>
+
+        <div id="analysisResults" style="display:none;"></div>
+        <table id="analysisTable"></table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
