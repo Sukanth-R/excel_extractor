@@ -11,6 +11,8 @@ async function extractData(){
         return;
     }
 
+    showLoader();
+
     const formData=new FormData();
     formData.append('file',file);
 
@@ -20,6 +22,9 @@ async function extractData(){
             body:formData
         })
         const result=await response.json();
+
+        showSuccess("Data extracted successfully!");
+        hideLoader();
 
         if(!response.ok){
             throw new error(result.error||"file extraction failer");
@@ -31,7 +36,6 @@ async function extractData(){
         console.log('Rows',result.rows);
         console.log('Records',result.data);
 
-        alert("Successfully extracted data from the Excel file. Check the console for details.");
 
         document.getElementsByClassName("dataSection")[0].style.display="block";
 
@@ -74,6 +78,7 @@ async function analyzeData(){
         alert('Please enter a question.');
         return;
     }
+    showLoader();
 
     const response=await fetch('https://excel-extractor-server-api.onrender.com/analyze',{
         method:'POST',
@@ -87,6 +92,10 @@ async function analyzeData(){
 
     });
     const result=await response.json();
+
+    showSuccess("Data analyzed successfully!");
+
+    hideLoader();
     console.log(result);
     document.getElementById('analysisResults').textContent=result.summary || result.error;;
     document.getElementById("analysisResults").style.display="block";
@@ -115,4 +124,29 @@ async function analyzeData(){
 
     table.appendChild(thead);
     table.appendChild(tbody);
+}
+function showLoader() {
+    document.getElementById("loadingPopup").style.display = "flex";
+}
+
+function hideLoader() {
+    document.getElementById("loadingPopup").style.display = "none";
+}
+
+function showSuccess(message,title="Success") {
+    const popup = document.getElementById("successPopup");
+    document.getElementById("successTitle").textContent = title;
+    document.getElementById("successMessage").textContent = message;
+
+    // Restart the tick animation every time
+    const icon = popup.querySelector(".success-icon");
+    icon.style.display = "none";
+    void icon.offsetWidth;
+    icon.style.display = "block";
+
+    popup.style.display = "flex";
+
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, 2000);
 }

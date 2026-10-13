@@ -29,11 +29,37 @@
     <div class="analyzeSection">
         <h2>Ask a Question on excel data</h2>
         <textarea id="questionInput" placeholder="Ex:Summarize the data in the first sheet."></textarea>
-        <button id="analyzeButton" onclick="analyzeData()">Analyze Data with Claude</button>
+        <button id="analyzeButton" onclick="analyzeData()">Analyze Data with AI</button>
 
         <div id="analysisResults" style="display:none;"></div>
         <table id="analysisTable"></table>
     </div>
+
+    <!-- Loading Popup -->
+    <div id="loadingPopup" class="popup-overlay">
+        <div class="popup-box">
+            <div class="spinner"></div>
+            <h3>Processing...</h3>
+            <p>Please wait while we process your request.</p>
+        </div>
+    </div>
+
+<!-- Success Popup -->
+<div id="successPopup" class="popup-overlay">
+    <div class="popup-box success-box">
+        <div class="success-icon">
+            <svg viewBox="0 0 52 52">
+                <circle class="success-circle" cx="26" cy="26" r="24" fill="none"/>
+                <path class="success-check" fill="none"
+                      d="M14 27 L22 35 L38 18"/>
+            </svg>
+        </div>
+
+        <h3 id="successTitle">Success!</h3>
+        <p id="successMessage">Your request completed successfully.</p>
+    </div>
+</div>
+
 
     <script src="script.js"></script>
 </body>
